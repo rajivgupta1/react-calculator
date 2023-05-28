@@ -109,7 +109,7 @@ export const Calculator = () => {
         }
 
         if (val === "="){
-            const lastChar =strToDisplay.slice(-1);
+            const lastChar =strToDisplay[strToDisplay.length -1];
             let tempStringValue = strToDisplay;
 
             if(operators.includes(lastChar)){
@@ -128,7 +128,7 @@ export const Calculator = () => {
             const lastChar = strToDisplay[strToDisplay.length -1];
 
             if(operators.includes(lastChar)){
-                tempStringValue = setStrToDisplay(strToDisplay.slice(0, -1));
+                tempStringValue = strToDisplay.slice(0, -1);
             }
             setStrToDisplay(tempStringValue + val);
 
@@ -136,6 +136,21 @@ export const Calculator = () => {
             return;
 
          }
+
+         if(val === "."){
+            if(lastOperator){
+                const operatorIndex = strToDisplay.lastIndexOf(lastOperator);
+                const numberAfterLastOperator = strToDisplay.slice(operatorIndex);
+                 
+                if(numberAfterLastOperator.includes(".")){
+                    return;
+                }
+            }
+
+            if(!lastOperator && strToDisplay.includes(".")){
+                return;
+            }
+         };
 
 
 
